@@ -1,17 +1,33 @@
 input.onButtonPressed(Button.A, function () {
-    Horas += 1
+    if (Horas < 23) {
+        Horas += 1
+    } else {
+        Horas = 0
+    }
 })
 input.onButtonPressed(Button.B, function () {
-    Minutos += 1
+    if (Minutos < 59) {
+        Minutos += 1
+    } else {
+        Minutos = 0
+    }
 })
 let Horas = 0
 let Minutos = 0
 loops.everyInterval(60000, function () {
-    Minutos += 1
+    if (Minutos < 59) {
+        Minutos += 1
+    } else {
+        Minutos = 0
+        if (Horas < 23) {
+            Horas += 1
+        } else {
+            Horas = 0
+        }
+    }
 })
 basic.forever(function () {
-    basic.showString("" + Horas + ":" + Minutos)
-})
-loops.everyInterval(3600000, function () {
-    Horas += 1
+    let horasFormatadas = Horas < 10 ? "0" + Horas : "" + Horas
+let minutosFormatados = Minutos < 10 ? "0" + Minutos : "" + Minutos
+basic.showString("" + horasFormatadas + ":" + minutosFormatados)
 })
